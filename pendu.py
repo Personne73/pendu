@@ -59,7 +59,7 @@ HANGMANPICS = ['''
       |
 =========''']
 ERROR = 0
-WORD = "banane pomme mandarine orange".split(" ")
+LETTERUSED = []
 
 
 def read_file(filename):
@@ -85,10 +85,13 @@ def error_state():
 
 def game(letter, word_to_guess, hidden_word):
     global ERROR
+    global LETTERUSED
+
     if letter not in word_to_guess:
         print("Vous venez de faire une erreur !\n")
         error_state()
         ERROR += 1
+        LETTERUSED.append(letter)
     else:
         list_word_to_guess = list(word_to_guess)
         list_hidden_word = hidden_word.split(" ")
@@ -99,11 +102,12 @@ def game(letter, word_to_guess, hidden_word):
                     list_hidden_word[index] = letter
 
             hidden_word = " ".join(list_hidden_word)
-            print(hidden_word, "\n")
             if ERROR > 1:
                 error_state()
         else:
-            print("Vous avez déjà entrez cette lettre, choisissez s'en une autre !\n")
+            print("Vous avez déjà entrez cette lettre, choisissez en une autre !\n")
+    print("Lettre déjà utilisée : ", set(LETTERUSED))
+    print(hidden_word, "\n")
     return hidden_word
 
 
@@ -115,11 +119,11 @@ def main():
     while 1:
         hidden_word = game(ask_letter(), word, hidden_word)
         if ERROR == len(HANGMANPICS):
-            print("---- GAME OVER ----")
+            print("\n---- GAME OVER ----")
             print(f"Le bon mot était : {word}")
             return
         if "_" not in hidden_word:
-            print("---- Victoir du joueur français ----")
+            print("\n---- Victoire du joueur français ----")
             return
 
 
