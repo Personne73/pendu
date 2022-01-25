@@ -68,7 +68,11 @@ def read_file(filename):
 
 
 def random_word(data):
-    return data[randint(0, len(data)-1)]
+    word = data[randint(0, len(data)-1)]
+    if len(word) < 4:
+        random_word(data)
+    return word
+    # return data[randint(0, len(data)-1)]
 
 
 def affichage(taille: int):
