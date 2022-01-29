@@ -102,7 +102,7 @@ def game(letter, word_to_guess, hidden_word):
                 if value == letter:
                     hidden_word = hidden_word[:index * 2] + letter + hidden_word[index * 2 + 1:]
 
-            if ERROR > 1:
+            if ERROR > 0:
                 error_state()
         else:
             print("Vous avez déjà entrez cette lettre, choisissez en une autre !\n")
