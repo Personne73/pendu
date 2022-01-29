@@ -84,7 +84,7 @@ def ask_letter():
 
 
 def error_state():
-    print(HANGMANPICS[ERROR])
+    print(HANGMANPICS[ERROR-1])
 
 
 def game(letter, word_to_guess, hidden_word):
@@ -93,8 +93,8 @@ def game(letter, word_to_guess, hidden_word):
 
     if letter not in word_to_guess:
         print("Vous venez de faire une erreur !\n")
-        error_state()
         ERROR += 1
+        error_state()
         LETTERUSED.append(letter)
     else:
         if letter not in hidden_word:
@@ -102,7 +102,7 @@ def game(letter, word_to_guess, hidden_word):
                 if value == letter:
                     hidden_word = hidden_word[:index * 2] + letter + hidden_word[index * 2 + 1:]
 
-            if ERROR > 0:
+            if ERROR >= 1:
                 error_state()
         else:
             print("Vous avez déjà entrez cette lettre, choisissez en une autre !\n")
